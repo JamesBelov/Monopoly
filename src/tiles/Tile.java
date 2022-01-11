@@ -1,3 +1,6 @@
+package tiles;
+import util.Token;
+
 public abstract class Tile {
 
     protected String name;

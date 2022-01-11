@@ -1,3 +1,4 @@
+package util;
 public enum Token {
 
     BATTLESHIP, 

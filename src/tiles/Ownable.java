@@ -1,3 +1,6 @@
+package tiles;
+import util.Token;
+
 public abstract class Ownable extends Tile {
 
     private boolean owned;

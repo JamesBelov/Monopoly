@@ -1,6 +1,8 @@
+package main;
 import java.util.HashMap;
 import java.util.Map;
-
+import tiles.*;
+import util.Token;
 public class Board {
     //The array of tiles that players will move around on
     private Tile[] tileList;
