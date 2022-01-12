@@ -7,11 +7,11 @@ import util.RequestedPayoutExceedsTokenLiquidityException;
 
 public abstract class Ownable extends Tile {
 
-    private Token owner;
-    private int marketPrice;
-    private boolean mortgaged;
-    private int mortgagePayout;
-    private int unmortgagePrice;
+    protected Token owner;
+    protected int marketPrice;
+    protected boolean mortgaged;
+    protected int mortgagePayout;
+    protected int unmortgagePrice;
 
     public abstract void billRent(Token renter) throws RequestedPayoutExceedsTokenLiquidityException;
 
