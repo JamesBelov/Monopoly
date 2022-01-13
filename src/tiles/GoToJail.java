@@ -1,5 +1,9 @@
 package tiles;
+import util.Token;
 
 public class GoToJail extends Tile{
-    //needs implementation
+    public void onLand(Token lander, int diceRoll)
+    {
+        
+    }
 }

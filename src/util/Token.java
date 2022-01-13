@@ -20,6 +20,17 @@ public enum Token {
     private int liquidity = 1500;
     private int numberOfGetOutOfJailFreeCards = 0;
     private ArrayList<Property> equity;
+    private boolean inJail = false;
+
+    private boolean isInJail()
+    {
+        return inJail;
+    }
+
+    private void setInJail(boolean poop)
+    {
+        inJail = poop;
+    }
 
     public void increaseLiquidity(int increase){
         liquidity += increase;
