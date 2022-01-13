@@ -22,12 +22,12 @@ public enum Token {
     private ArrayList<Property> equity;
     private boolean inJail = false;
 
-    private boolean isInJail()
+    public boolean isInJail()
     {
         return inJail;
     }
 
-    private void setInJail(boolean poop)
+    public void setInJail(boolean poop)
     {
         inJail = poop;
     }
