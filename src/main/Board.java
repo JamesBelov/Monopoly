@@ -27,7 +27,7 @@ public class Board {
     public static void movePlayer(Token player, int diceRoll, Tile tile) throws RequestedPayoutExceedsTokenLiquidityException{
 
         if(tile == null){
-            tile = tileList[(int) playerLocations.get(player) + diceRoll];
+            tile = tileList[(int) playerLocations.get(player) + diceRoll]; //cant handle passing go
         }
 
         playerLocations.put(player, Arrays.binarySearch(tileList, tile));
