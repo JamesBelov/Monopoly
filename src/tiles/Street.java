@@ -1,8 +1,11 @@
 package tiles;
-import java.util.Arrays;
 
+import java.util.Arrays;
+import java.util.ArrayList;
 import main.Board;
 import util.*; 
+
+
 public class Street extends Property {
     private static int totalHouses = 32;
     private static int totalHotels = 12;
@@ -82,6 +85,10 @@ public class Street extends Property {
         return color;
     }
 
+    public int getNumHouses(){
+        return houses;
+    }
+
     public int[] getRentPricingLevels(){
         return Arrays.copyOf(rentPricingLevels, rentPricingLevels.length);
     }
@@ -89,7 +96,27 @@ public class Street extends Property {
     public void mortage() throws InvalidActionException{ 
 
         if(mortgaged) throw new InvalidActionException(this.name + " is already mortgaged.");
-        if(houses > 0) throw new InvalidActionException("Must sell houses before mortgaging");//fails to check for houses on rest of color set
+        if(houses > 0) throw new InvalidActionException("Must sell houses before mortgaging");
+        if(Board.doesTokenOwnColorSet(owner, color)){
+
+            ArrayList<Street> colorSet = new ArrayList<Street>();
+            for(Property p : owner.getEquity()){
+                try{
+                    if(p.getClass() == Class.forName("Street") && ((Street) p).getColor() == color){
+                        colorSet.add((Street) p);
+                    }
+                }
+                catch(ClassNotFoundException e){
+                    System.out.println("if this is ever printed getClass() doesn't work how i think it does");
+                }  
+            }
+
+            for(Street s : colorSet){
+                if(s.getNumHouses() > 0){
+                    throw new InvalidActionException("Must sell all houses on the " + color + " color set before mortgaging.");
+                }
+            }
+        }
         
         owner.increaseLiquidity(mortgagePayout);
         mortgaged = true;

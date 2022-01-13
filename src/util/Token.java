@@ -22,7 +22,7 @@ public enum Token {
     private ArrayList<Property> equity;
     private boolean inJail = false;
 
-    private boolean isInJail()
+    private boolean isInJail() //why is this private? - james
     {
         return inJail;
     }
