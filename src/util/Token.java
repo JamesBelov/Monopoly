@@ -27,7 +27,7 @@ public enum Token {
         return inJail;
     }
 
-    private void setInJail(boolean poop)
+    public void setInJail(boolean poop)
     {
         inJail = poop;
     }
