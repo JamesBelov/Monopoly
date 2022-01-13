@@ -22,6 +22,6 @@ public class AssetForfeitureHandler {
         if(!player1.getEquity().containsAll(equity1) || !player2.getEquity().containsAll(equity2) ){
             throw new InvalidActionException("Players don't own all requested Propertys");
         }
-    }
+    }//this method is the intended primary trade handler but it cant deal with get out of jail free cards at the moment
 
 }

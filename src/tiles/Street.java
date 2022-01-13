@@ -24,14 +24,27 @@ public class Street extends Property {
         this.rentPricingLevels = rentPricingLevels;
     }
 
-    public void billRent(Token renter, int diceRoll)
+    public void billRent(Token renter, int diceRoll) throws RequestedPayoutExceedsTokenLiquidityException
     {
-        //need implementation
+        int rent = 0;
+
+        if(!Board.doesTokenOwnColorSet(owner, color))
+        {
+            rent = rentPricingLevels[0];
+        }
+        else
+        {
+            rent = rentPricingLevels[houses + 1];
+        }
+
+        renter.decreaseLiquidity(rent);
+        owner.increaseLiquidity(rent);
+
     }
 
     public void buildHouse() throws RequestedPayoutExceedsTokenLiquidityException, InvalidActionException
     {
-        if(!Board.doesTokenOwnColorSet(owner, this.color)) throw new InvalidActionException("Need full color set to build houses");
+        if(!Board.doesTokenOwnColorSet(owner, color)) throw new InvalidActionException("Need full color set to build houses");
         if(houses == 4){
             //hotel build request
             if(totalHotels <= 0) throw new InvalidActionException("No hotels left");
@@ -71,6 +84,16 @@ public class Street extends Property {
 
     public int[] getRentPricingLevels(){
         return Arrays.copyOf(rentPricingLevels, rentPricingLevels.length);
+    }
+
+    public void mortage() throws InvalidActionException{ 
+
+        if(mortgaged) throw new InvalidActionException(this.name + " is already mortgaged.");
+        if(houses > 0) throw new InvalidActionException("Must sell houses before mortgaging");//fails to check for houses on rest of color set
+        
+        owner.increaseLiquidity(mortgagePayout);
+        mortgaged = true;
+
     }
 
 }

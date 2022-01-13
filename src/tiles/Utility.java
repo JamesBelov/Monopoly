@@ -3,9 +3,9 @@ package tiles;
 import util.RequestedPayoutExceedsTokenLiquidityException;
 import util.Token;
 
-public class Railroad extends Property{
+public class Utility extends Property{
 
-    public Railroad(String name, int marketPrice){
+    public Utility(String name, int marketPrice){
         this.name = name;
         this.marketPrice = marketPrice;
         this.mortgagePayout = marketPrice / 2;
@@ -14,12 +14,12 @@ public class Railroad extends Property{
 
     public void billRent(Token renter, int diceRoll) throws RequestedPayoutExceedsTokenLiquidityException{
 
-        int numRailRoadsOwnedByOwner = 0;
+        int numUtilitiesOwnedByOwner = 0;
 
         for(Property property : owner.getEquity()){
             try{
-                if(property.getClass() == Class.forName("Railroad") && !property.mortgaged){
-                    numRailRoadsOwnedByOwner++;
+                if(property.getClass() == Class.forName("Utility") && !property.mortgaged){
+                    numUtilitiesOwnedByOwner++;
                 }
             }
             catch(ClassNotFoundException e){
@@ -27,18 +27,15 @@ public class Railroad extends Property{
             }
         }
 
-        int rent = -1;
+        int multiplier = -1; 
+        if(numUtilitiesOwnedByOwner == 1) multiplier = 4;
+        if(numUtilitiesOwnedByOwner == 2) multiplier = 10;
 
-        switch(numRailRoadsOwnedByOwner){
-            case 1: rent = 25;
-            case 2: rent = 50;
-            case 3: rent = 100;
-            case 4: rent = 200;
-        }
+        int rent = diceRoll * multiplier;
 
         renter.decreaseLiquidity(rent);
         owner.increaseLiquidity(rent);
 
-    }    
-
+    }
+    
 }

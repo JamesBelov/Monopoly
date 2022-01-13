@@ -22,7 +22,7 @@ public abstract class Property extends Tile {
             return;
         }
 
-        if(owner != player){
+        if(owner != player && !mortgaged){
             billRent(player, diceRoll);
         }
 
@@ -32,7 +32,7 @@ public abstract class Property extends Tile {
         owner = player;
     }
 
-    public void mortage() throws InvalidActionException{ //property class needs to override this for house functionality
+    public void mortage() throws InvalidActionException{ //street class needs to override this for house functionality
 
         if(mortgaged) throw new InvalidActionException(this.name + " is already mortgaged.");
         
