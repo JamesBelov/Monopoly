@@ -1,5 +1,5 @@
 package tiles;
 
-public class Drawable {
+public class FreeParking extends Tile{
     //needs implementation
 }

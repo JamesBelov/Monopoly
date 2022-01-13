@@ -1,5 +1,5 @@
 package tiles;
 
-public class Drawable {
+public class Go extends Tile{
     //needs implementation
 }
