@@ -3,19 +3,22 @@ package tiles;
 import util.RequestedPayoutExceedsTokenLiquidityException;
 import util.Token;
 
-public class Railroad extends Ownable{
+public class Railroad extends Property{
 
-    public Railroad(String name){
+    public Railroad(String name, int marketPrice){
         this.name = name;
+        this.marketPrice = marketPrice;
+        this.mortgagePayout = marketPrice / 2;
+        this.unmortgagePrice = (int) (mortgagePayout * 1.1);
     }
 
-    public void billRent(Token renter) throws RequestedPayoutExceedsTokenLiquidityException{
+    public void billRent(Token renter, int diceRoll) throws RequestedPayoutExceedsTokenLiquidityException{
 
         int numRailRoadsOwnedByOwner = 0;
 
-        for(Ownable property : owner.getEquity()){
+        for(Property property : owner.getEquity()){
             try{
-                if(property.getClass() == Class.forName("Railroad")){
+                if(property.getClass() == Class.forName("Railroad") && !property.mortgaged){
                     numRailRoadsOwnedByOwner++;
                 }
             }

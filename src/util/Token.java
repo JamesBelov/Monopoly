@@ -19,7 +19,7 @@ public enum Token {
 
     private int liquidity = 1500;
     private int numberOfGetOutOfJailFreeCards = 0;
-    private ArrayList<Ownable> equity;
+    private ArrayList<Property> equity;
 
     public void increaseLiquidity(int increase){
         liquidity += increase;
@@ -47,7 +47,7 @@ public enum Token {
         return liquidity;
     }
 
-    public ArrayList<Ownable> getEquity(){
+    public ArrayList<Property> getEquity(){
         return equity;
     }
 

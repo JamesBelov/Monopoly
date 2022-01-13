@@ -5,7 +5,7 @@ import util.Token;
 import util.InvalidActionException;
 import util.RequestedPayoutExceedsTokenLiquidityException;
 
-public abstract class Ownable extends Tile {
+public abstract class Property extends Tile {
 
     protected Token owner;
     protected int marketPrice;
@@ -13,17 +13,17 @@ public abstract class Ownable extends Tile {
     protected int mortgagePayout;
     protected int unmortgagePrice;
 
-    public abstract void billRent(Token renter) throws RequestedPayoutExceedsTokenLiquidityException;
+    public abstract void billRent(Token renter, int diceRoll) throws RequestedPayoutExceedsTokenLiquidityException;
 
     public void onLand(Token player, int diceRoll) throws RequestedPayoutExceedsTokenLiquidityException{
 
         if(owner == null){
-            AssetForfeitureHandler.handleInitialOwnableLandEvent(player, this);
+            AssetForfeitureHandler.handleInitialPropertyLandEvent(player, this);
             return;
         }
 
         if(owner != player){
-            billRent(player);
+            billRent(player, diceRoll);
         }
 
     }

@@ -6,6 +6,7 @@ import java.util.Map;
 import tiles.*;
 import util.RequestedPayoutExceedsTokenLiquidityException;
 import util.Token;
+import util.Color;
 
 public class Board {
     //The array of tiles that players will move around on
@@ -32,5 +33,10 @@ public class Board {
         playerLocations.put(player, Arrays.binarySearch(tileList, tile));
         tile.onLand(player, diceRoll);
 
+    }
+
+    public static boolean doesTokenOwnColorSet(Token player, Color color){ //requires them to be unmortgaged
+        //needs implementation
+        return false;
     }
 }
